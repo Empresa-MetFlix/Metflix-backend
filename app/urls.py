@@ -7,14 +7,20 @@ from drf_spectacular.views import (
 )
 from rest_framework.routers import DefaultRouter
 
-from core.views import UserViewSet
+from core.views import UserViewSet, CategoryViewSet, MediaViewSet, RentalViewSet
 
 router = DefaultRouter()
 
+# Rotas
 router.register(r'usuarios', UserViewSet, basename='usuarios')
+router.register(r'categorias', CategoryViewSet, basename='categorias')
+router.register(r'midias', MediaViewSet, basename='midias')
+router.register(r'locacoes', RentalViewSet, basename='locacoes')
+
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+
     # OpenAPI 3
     path('api/schema/', SpectacularAPIView.as_view(), name='schema'),
     path(
@@ -27,6 +33,7 @@ urlpatterns = [
         SpectacularRedocView.as_view(url_name='schema'),
         name='redoc',
     ),
+
     # API
     path('api/', include(router.urls)),
 ]
