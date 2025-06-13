@@ -7,16 +7,25 @@ from drf_spectacular.views import (
 )
 from rest_framework.routers import DefaultRouter
 
-from core.views import UserViewSet, CategoryViewSet, MediaViewSet, RentalViewSet
+from core.views import (
+    UserViewSet, ClienteViewSet, FuncionarioViewSet,
+    ReservaViewSet, GeneroViewSet, MidiaViewSet,
+    LocacaoViewSet, LocacaoMidiaViewSet, PagamentoViewSet
+)
+
 
 router = DefaultRouter()
 
 # Rotas
 router.register(r'usuarios', UserViewSet, basename='usuarios')
-router.register(r'categorias', CategoryViewSet, basename='categorias')
-router.register(r'midias', MediaViewSet, basename='midias')
-router.register(r'locacoes', RentalViewSet, basename='locacoes')
-
+router.register(r'clientes', ClienteViewSet)
+router.register(r'funcionarios', FuncionarioViewSet)
+router.register(r'reservas', ReservaViewSet)
+router.register(r'generos', GeneroViewSet)
+router.register(r'midias', MidiaViewSet)
+router.register(r'locacoes', LocacaoViewSet)
+router.register(r'locacoes-midias', LocacaoMidiaViewSet)
+router.register(r'pagamentos', PagamentoViewSet)
 
 urlpatterns = [
     path('admin/', admin.site.urls),
