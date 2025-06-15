@@ -13,9 +13,9 @@ Equipe:
 - [Brayan Pedroso de Mattos](https://github.com/brayanpedroso)
 
 Links do projeto:
--   [Documentação (esse documento)](github.com/marcoandre/pi-modelo)
--   Backend: [Repositório](github.com/marcoandre/pi-backend) e [Publicação](https://pi-backend.herokuapp.com/)
--   Frontend: [Repositório](github.com/marcoandre/pi-frontend) e [Publicação](https://pi-frontend.herokuapp.com/)
+-   [Documentação (esse documento)](https://github.com/Empresa-MetFlix/Metflix-backend?tab=readme-ov-file#projeto-integrador---modelo)
+-   Backend: [Repositório](https://github.com/Empresa-MetFlix/Metflix-backend) e [Publicação](https://metflix-backend-0b82.onrender.com/)
+-   Frontend: [Repositório](https://github.com/Empresa-MetFlix/Metflix-frontend) e [Publicação](metflixfrontend-f4q09iv8i-brayanpedrosos-projects.vercel.app)
 
 
 
