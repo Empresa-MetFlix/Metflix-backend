@@ -6,6 +6,11 @@ from drf_spectacular.views import (
     SpectacularSwaggerView,
 )
 from rest_framework.routers import DefaultRouter
+# Importar views de autenticação do Django Rest Framework
+from rest_framework_simplejwt.views import (
+    TokenObtainPairView,
+    TokenRefreshView,
+)
 
 from core.views import (
     UserViewSet, ClienteViewSet, FuncionarioViewSet,
@@ -45,4 +50,8 @@ urlpatterns = [
 
     # API
     path('api/', include(router.urls)),
+    
+    # Rotas de autenticação (JWT)
+    path('api/token/', TokenObtainPairView.as_view(), name='token_obtain_pair'),
+    path('api/token/refresh/', TokenRefreshView.as_view(), name='token_refresh'),
 ]
