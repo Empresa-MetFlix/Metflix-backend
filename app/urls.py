@@ -18,8 +18,10 @@ from core.views import (
     LocacaoViewSet, LocacaoMidiaViewSet, PagamentoViewSet
 )
 
-
-router = DefaultRouter()
+# -----------------------------------------------------------
+# PONTO CRÍTICO: DEFINIÇÃO DO ROUTER ANTES DO USO!
+router = DefaultRouter() 
+# -----------------------------------------------------------
 
 # Rotas
 router.register(r'usuarios', UserViewSet, basename='usuarios')
@@ -51,6 +53,15 @@ urlpatterns = [
     # API
     path('api/', include(router.urls)),
     
+    # --- ROTA DE REGISTRO MANUAL PARA O FRONT-END ---
+    # Liga o POST para /api/auth/register/ à ação 'create' (registro) do UserViewSet
+    path(
+        'api/auth/register/', 
+        UserViewSet.as_view({'post': 'create'}), 
+        name='user-register'
+    ),
+    # ------------------------------------------------
+
     # Rotas de autenticação (JWT)
     path('api/token/', TokenObtainPairView.as_view(), name='token_obtain_pair'),
     path('api/token/refresh/', TokenRefreshView.as_view(), name='token_refresh'),
