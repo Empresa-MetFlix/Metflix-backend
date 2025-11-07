@@ -12,10 +12,12 @@ from rest_framework_simplejwt.views import (
     TokenRefreshView,
 )
 
+# ATENÇÃO: Adicionado o FavoriteViewSet na importação
 from core.views import (
     UserViewSet, ClienteViewSet, FuncionarioViewSet,
     ReservaViewSet, GeneroViewSet, MidiaViewSet,
-    LocacaoViewSet, LocacaoMidiaViewSet, PagamentoViewSet
+    LocacaoViewSet, LocacaoMidiaViewSet, PagamentoViewSet,
+    FavoriteViewSet,  # <-- FAVORITE VIEWSET ADICIONADO AQUI
 )
 
 # -----------------------------------------------------------
@@ -25,6 +27,12 @@ router = DefaultRouter()
 
 # Rotas
 router.register(r'usuarios', UserViewSet, basename='usuarios')
+
+# ROTAS DA MINHA LISTA / FAVORITOS
+# Rota para /api/favorites/ (Acesso GET, POST e DELETE por ID)
+# O basename é importante porque o ViewSet não usa o nome do modelo diretamente.
+router.register(r'favorites', FavoriteViewSet, basename='favorites') # <-- REGISTRO ADICIONADO
+
 router.register(r'clientes', ClienteViewSet)
 router.register(r'funcionarios', FuncionarioViewSet)
 router.register(r'reservas', ReservaViewSet)
