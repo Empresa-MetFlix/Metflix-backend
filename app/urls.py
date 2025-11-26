@@ -6,46 +6,62 @@ from drf_spectacular.views import (
     SpectacularSwaggerView,
 )
 from rest_framework.routers import DefaultRouter
-# Importar views de autenticação do Django Rest Framework
-from rest_framework_simplejwt.views import (
-    TokenObtainPairView,
-    TokenRefreshView,
-)
+from rest_framework_simplejwt.views import TokenRefreshView
 
-# ATENÇÃO: Adicionado o FavoriteViewSet na importação
+# Importar views
 from core.views import (
-    UserViewSet, ClienteViewSet, FuncionarioViewSet,
-    ReservaViewSet, GeneroViewSet, MidiaViewSet,
-    LocacaoViewSet, LocacaoMidiaViewSet, PagamentoViewSet,
-    FavoriteViewSet,  # <-- FAVORITE VIEWSET ADICIONADO AQUI
+    UserViewSet, 
+    ClienteViewSet, 
+    FuncionarioViewSet,
+    ReservaViewSet, 
+    GeneroViewSet, 
+    MidiaViewSet,
+    LocacaoViewSet, 
+    LocacaoMidiaViewSet, 
+    PagamentoViewSet,
+    FavoriteViewSet,
 )
 
-# -----------------------------------------------------------
-# PONTO CRÍTICO: DEFINIÇÃO DO ROUTER ANTES DO USO!
-router = DefaultRouter() 
-# -----------------------------------------------------------
+# Importar custom token view
+from core.views.token import CustomTokenObtainPairView
 
-# Rotas
+# -----------------------------------------------------------
+# ROUTER CONFIGURATION
+# -----------------------------------------------------------
+router = DefaultRouter()
+
+# Rotas de usuários
 router.register(r'usuarios', UserViewSet, basename='usuarios')
 
-# ROTAS DA MINHA LISTA / FAVORITOS
-# Rota para /api/favorites/ (Acesso GET, POST e DELETE por ID)
-# O basename é importante porque o ViewSet não usa o nome do modelo diretamente.
-router.register(r'favorites', FavoriteViewSet, basename='favorites') # <-- REGISTRO ADICIONADO
+# Rotas de favoritos (Minha Lista)
+router.register(r'favorites', FavoriteViewSet, basename='favorites')
 
+# Rotas de clientes e funcionários
 router.register(r'clientes', ClienteViewSet)
 router.register(r'funcionarios', FuncionarioViewSet)
+
+# Rotas de reservas
 router.register(r'reservas', ReservaViewSet)
+
+# Rotas de gêneros e mídias
 router.register(r'generos', GeneroViewSet)
 router.register(r'midias', MidiaViewSet)
+
+# Rotas de locações
 router.register(r'locacoes', LocacaoViewSet)
 router.register(r'locacoes-midias', LocacaoMidiaViewSet)
+
+# Rotas de pagamentos
 router.register(r'pagamentos', PagamentoViewSet)
 
+# -----------------------------------------------------------
+# URL PATTERNS
+# -----------------------------------------------------------
 urlpatterns = [
+    # Admin
     path('admin/', admin.site.urls),
-
-    # OpenAPI 3
+    
+    # OpenAPI 3 / Swagger / Redoc
     path('api/schema/', SpectacularAPIView.as_view(), name='schema'),
     path(
         'api/swagger/',
@@ -57,20 +73,24 @@ urlpatterns = [
         SpectacularRedocView.as_view(url_name='schema'),
         name='redoc',
     ),
-
-    # API
+    
+    # API Router (todas as rotas registradas)
     path('api/', include(router.urls)),
     
-    # --- ROTA DE REGISTRO MANUAL PARA O FRONT-END ---
-    # Liga o POST para /api/auth/register/ à ação 'create' (registro) do UserViewSet
+    # --- AUTENTICAÇÃO ---
+    # Rota de registro manual (POST /api/auth/register/)
     path(
-        'api/auth/register/', 
-        UserViewSet.as_view({'post': 'create'}), 
+        'api/auth/register/',
+        UserViewSet.as_view({'post': 'create'}),
         name='user-register'
     ),
-    # ------------------------------------------------
-
-    # Rotas de autenticação (JWT)
-    path('api/token/', TokenObtainPairView.as_view(), name='token_obtain_pair'),
+    
+    # Rota de login JWT customizada (POST /api/token/)
+    path('api/token/', CustomTokenObtainPairView.as_view(), name='token_obtain_pair'),
+    
+    # Rota de refresh token (POST /api/token/refresh/)
     path('api/token/refresh/', TokenRefreshView.as_view(), name='token_refresh'),
+    
+    # Rota de informações do usuário logado (GET /api/usuarios/me/)
+    # Já está coberta pelo router via @action no UserViewSet
 ]

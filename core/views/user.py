@@ -1,6 +1,6 @@
 from rest_framework import status
 from rest_framework.decorators import action
-from rest_framework.permissions import IsAuthenticated
+from rest_framework.permissions import IsAuthenticated, AllowAny
 from rest_framework.response import Response
 from rest_framework.viewsets import ModelViewSet
 
@@ -11,10 +11,19 @@ from core.serializers import UserSerializer
 class UserViewSet(ModelViewSet):
     queryset = User.objects.all().order_by('id')
     serializer_class = UserSerializer
-
+    
+    def get_permissions(self):
+        """
+        Define permissões por ação:
+        - create (registro): permite acesso público
+        - outras ações: requer autenticação
+        """
+        if self.action == 'create':
+            return [AllowAny()]
+        return [IsAuthenticated()]
+    
     @action(detail=False, methods=['get'], permission_classes=[IsAuthenticated])
     def me(self, request):
-        """Return the current authenticated user"""
-        user = request.user
-        serializer = UserSerializer(user)
+        """Retorna o usuário autenticado atual"""
+        serializer = self.get_serializer(request.user)
         return Response(serializer.data, status=status.HTTP_200_OK)

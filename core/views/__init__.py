@@ -6,11 +6,19 @@ from .genero import GeneroViewSet
 from .midia import MidiaViewSet
 from .locacao import LocacaoViewSet, LocacaoMidiaViewSet
 from .pagamento import PagamentoViewSet
-from .favorite import FavoriteViewSet # <--- ADICIONADO
+from .favorite import FavoriteViewSet
+from .token import CustomTokenObtainPairView
 
 __all__ = [
-    "UserViewSet", "ClienteViewSet", "FuncionarioViewSet",
-    "ReservaViewSet", "GeneroViewSet", "MidiaViewSet",
-    "LocacaoViewSet", "LocacaoMidiaViewSet", "PagamentoViewSet",
-    "FavoriteViewSet", # <--- ADICIONADO AQUI TAMBÉM
+    'UserViewSet',
+    'ClienteViewSet',
+    'FuncionarioViewSet',
+    'ReservaViewSet',
+    'GeneroViewSet',
+    'MidiaViewSet',
+    'LocacaoViewSet',
+    'LocacaoMidiaViewSet',
+    'PagamentoViewSet',
+    'FavoriteViewSet',
+    'CustomTokenObtainPairView',
 ]
