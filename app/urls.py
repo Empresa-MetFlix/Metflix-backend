@@ -21,6 +21,9 @@ from core.views import (
 
 from core.views.profile import profiles_list, profile_detail
 
+# IMPORTA A HOME NOVA AQUI
+from core.public_view import home
+
 # Configurar router
 router = DefaultRouter()
 router.register(r'users', UserViewSet, basename='user')
@@ -36,6 +39,8 @@ router.register(r'favorites', FavoriteViewSet, basename='favorite')
 router.register(r'notifications', NotificationViewSet, basename='notification')
 
 urlpatterns = [
+    path('', home),  # HOME adicionada 💚
+
     path('admin/', admin.site.urls),
     
     # Autenticação JWT
@@ -43,7 +48,7 @@ urlpatterns = [
     path('api/token/refresh/', TokenRefreshView.as_view(), name='token_refresh'),
     path('api/register/', register_view, name='register'),
     
-    # Profiles (✅ CORRIGIDO)
+    # Profiles
     path('api/profiles/', profiles_list, name='profiles-list'),
     path('api/profiles/<int:pk>/', profile_detail, name='profile-detail'),
     
