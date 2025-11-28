@@ -176,3 +176,17 @@ PASSAGE_API_KEY = os.getenv('PASSAGE_API_KEY', 'api_key')
 PASSAGE_AUTH_STRATEGY = 2
 
 print(f'{MODE = } \n{MEDIA_URL = } \n{DATABASES = }')
+AUTHENTICATION_BACKENDS = [
+    'core.authentication.EmailBackend',  # ✅ ADICIONAR
+    'django.contrib.auth.backends.ModelBackend',
+]
+
+# ✅ Configurar USERNAME_FIELD para email
+AUTH_USER_MODEL = 'core.User'
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
+EMAIL_HOST_USER = os.getenv('EMAIL_HOST_USER', 'seu-email@gmail.com')
+EMAIL_HOST_PASSWORD = os.getenv('EMAIL_HOST_PASSWORD', 'sua-senha-de-app')
+DEFAULT_FROM_EMAIL = os.getenv('DEFAULT_FROM_EMAIL', 'Metflix <noreply@metflix.com>')

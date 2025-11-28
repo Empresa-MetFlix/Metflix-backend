@@ -7,8 +7,8 @@ from .midia import MidiaViewSet
 from .locacao import LocacaoViewSet, LocacaoMidiaViewSet
 from .pagamento import PagamentoViewSet
 from .favorite import FavoriteViewSet
-from .token import CustomTokenObtainPairView
-
+from .token import CustomTokenObtainPairView, register_view
+from .notification import NotificationViewSet  # NOVA VIEWSET DE NOTIFICATION
 __all__ = [
     'UserViewSet',
     'ClienteViewSet',
@@ -21,4 +21,7 @@ __all__ = [
     'PagamentoViewSet',
     'FavoriteViewSet',
     'CustomTokenObtainPairView',
+    'register_view',
+    'NotificationViewSet',  # ADICIONAR AQUI TAMBÉM
+
 ]

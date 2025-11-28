@@ -8,6 +8,8 @@ from .pagamento import PagamentoSerializer
 from .reserva import ReservaSerializer
 from .favorite import FavoriteSerializer
 from .token import CustomTokenObtainPairSerializer
+from .profile import ProfileSerializer  # NOVO SERIALIZER PARA PROFILE
+from .notification import NotificationSerializer  # NOVO SERIALIZER PARA NOTIFICATION
 
 __all__ = [
     'UserSerializer',
@@ -22,4 +24,6 @@ __all__ = [
     'ReservaSerializer',
     'FavoriteSerializer',
     'CustomTokenObtainPairSerializer',
+    'ProfileSerializer',  # ADICIONAR AQUI TAMBÉM
+    'NotificationSerializer',  # ADICIONAR AQUI TAMBÉM
 ]
