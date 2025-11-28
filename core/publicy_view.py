@@ -1,8 +1,0 @@
-from django.http import JsonResponse
-
-def home(request):
-    return JsonResponse({
-        "status": "ok",
-        "backend": "Metflix API online",
-        "docs": "/api/"
-    })
