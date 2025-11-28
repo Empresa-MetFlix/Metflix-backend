@@ -2,6 +2,7 @@ from django.contrib import admin
 from django.urls import path, include
 from rest_framework.routers import DefaultRouter
 from rest_framework_simplejwt.views import TokenRefreshView
+from django.http import HttpResponseRedirect 
 
 from core.views import (
     UserViewSet,
@@ -21,8 +22,10 @@ from core.views import (
 
 from core.views.profile import profiles_list, profile_detail
 
-# IMPORTA A HOME NOVA AQUI
-from core.public_view import home
+
+def root_redirect(request):
+    return HttpResponseRedirect('/api/')
+
 
 # Configurar router
 router = DefaultRouter()
@@ -38,20 +41,18 @@ router.register(r'reservas', ReservaViewSet)
 router.register(r'favorites', FavoriteViewSet, basename='favorite')
 router.register(r'notifications', NotificationViewSet, basename='notification')
 
+
 urlpatterns = [
-    path('', home),  # HOME adicionada 💚
+    path('', root_redirect),
 
     path('admin/', admin.site.urls),
-    
-    # Autenticação JWT
+
     path('api/token/', CustomTokenObtainPairView.as_view(), name='token_obtain_pair'),
     path('api/token/refresh/', TokenRefreshView.as_view(), name='token_refresh'),
     path('api/register/', register_view, name='register'),
-    
-    # Profiles
+
     path('api/profiles/', profiles_list, name='profiles-list'),
     path('api/profiles/<int:pk>/', profile_detail, name='profile-detail'),
-    
-    # Router padrão
+
     path('api/', include(router.urls)),
 ]
