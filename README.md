@@ -14,8 +14,8 @@ Equipe:
 
 Links do projeto:
 -   [Documentação (esse documento)](https://github.com/Empresa-MetFlix/Metflix-backend?tab=readme-ov-file#projeto-integrador---modelo)
--   Backend: [Repositório](https://github.com/Empresa-MetFlix/Metflix-backend) e [Publicação](https://metflix-backend-0b82.onrender.com/)
--   Frontend: [Repositório](https://github.com/Empresa-MetFlix/Metflix-frontend) e [Publicação](https://metflixfrontend.vercel.app/)
+-   Backend: [Repositório](https://github.com/Empresa-MetFlix/Metflix-backend) e [Publicação](https://metflix-backend-f44c.onrender.com/api/)
+-   Frontend: [Repositório](https://github.com/Empresa-MetFlix/Metflix-frontend) e [Publicação](https://metflix-frontend-pi.vercel.app/)
 
 
 
